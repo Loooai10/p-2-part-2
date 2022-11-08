@@ -17,28 +17,24 @@
   </script>
   
   <div class='row'>
-  <div class='col s12 m12 l12'>
+  <div class='col '>
   <h4 class='center'><%= recipe[0].label %></h4>
-  <div class='col s12 m3 l3 center'>
+  <div class='col  center'>
     <img class='responsive-img activator' src='<%= recipe[0].image %>' alt='<%= recipe[0].label %>'>
     <br>
     <a href='<%= recipe[0].url %>'>Instruction</a>
   </div>
-  <div class='col s12 m3 l3'>
+  <div class='col '>
     <h5>Ingredients: </h5>
     <div class='ingredients detail'>
       <ul class='browser-default'>
         <% for(i = 0; i < recipe[0].ingredientLines.length; i++ ) {%>
           <li> <%= recipe[0].ingredientLines[i] %> </li>
-        <% } %>
-      </ul>
-    </div>
-  </div>
+        <% } %> </ul></div> </div>
   
-  <div class='col s12 m3 l3'>
+  <div class='col '>
     <h5>Additional Info:</h5>
-    <div class='ingredients detail'>
-      <ul>
+    <div class='ingredients detail'><ul>
         <li><span class='label'>Calories Per Serving:</span> <script> document.write(calPerServ) </script></li>
         <li><span class='label'>Servings:</span> <%= recipe[0].yield %> </li>
         <h5  class='health'> Health Labels: </h5>
@@ -53,7 +49,7 @@
     </div>
   </div>
   
-  <div class='col s12 m3 l3'>
+  <div class='col'>
     <h5>Nutrients:</h5>
     <div class='ingredients detail'>
       <ul>
@@ -67,7 +63,4 @@
       <ul>
         <% for (let item in totalDaily) { %>
           <li> <span class='label'><%= totalDaily[item].label %>:</span> <%= Math.floor(totalDaily[item].quantity) %><%= totalDaily[item].unit %>   </li>
-        <% } %>
-      </ul>
-    </div>
-  </div>
+        <% } %> </ul></div></div>

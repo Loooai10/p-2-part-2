@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 let  recipeUrl = '';
 let encoded = '';
 
-router.get('/home/:recipeName', (req,res) => {
+router.get('/home/:recipeLabale', (req,res) => {
 	
 
 	res.send('this is the')
@@ -57,11 +57,11 @@ router.post('/new', async (req,res) => {
     //Create recipe
     let [newRecipe, created] = await db.recipe.findOrCreate({
         where: {
-            labal: req.body.labal,
-            ingredients: req.body.ingredients,
-            imgUrl: req.body.imgUrl,
-            url: req.body.url,
-            uri: req.body.uri,
+            labal: req.body.labal
+            // ingredients: req.body.ingredients,
+            // imgUrl: req.body.imgUrl,
+            // url: req.body.url,
+            // uri: req.body.uri,
         }
     })
     //Associate recipe to user

@@ -1,0 +1,109 @@
+<h1>This is my favorite recipes list!</h1>
+
+<% recipe.hits.forEach(p => { %><a href="/recipe/<%= recipe.id %>">
+<h3><%= p.recipe.label %></h3>
+</a>
+
+<div class="image">
+					
+	<img class='activator' src="<%= p.recipe.image %>" alt='<%= p.recipe.label %>'>
+
+</div>
+
+<%= p.recipe.label %>
+<form method="POST" action="/recipe/<%= p.recipe.id %>?_method=DELETE">
+    <button type="submit">delete</button>
+	<% for(i = 0; i < p.recipe.ingredientLines.length; i++ ) {%>
+		<li> <%= p.recipe.ingredientLines[i] %> </li>
+		<% } %>
+		<li>Calories: <%= p.recipe.calPerServ %></li>
+		<li>Servings: <%= p.recipe.yield %> </li>
+		<!-- <button class='col s12 m12 l12' type="submit">save &hearts;s</button> -->
+		<!-- <button class='col s12 m12 l12' type="submit">Delete</button> -->
+</form>
+
+
+<form method="POST" action="/recipe/new">
+
+	<input type="hidden" name="labal" value="<%= p.recipe.label %>">
+    <input class='center' type="hidden" name="ingredients" value="<%= p.recipe.ingredientLines %>">
+    <input class='center' type="hidden" name="url" value="<%= p.recipe.url %>">
+    <input class='center' type="hidden" name="uri" value="<%= p.recipe.uri %>">
+    <input class='center' type="hidden" name="imageUrl" value="<%= p.recipe.image %>">
+    <button type="submit">save</button>
+		
+</form>
+<% })  %>
+<div class='row'>
+	<div class='col s12 m12 l12'>
+		<% recipe.hits.forEach(function(recipe) { %>
+
+		<div class='col s12 m6 l6 all-recipes'>
+			<div class="recipe">
+                
+                 <div class="image">
+					
+						<img class='activator' src="<%= recipe.image %>" alt='<%= recipe.recipe.label %>'>
+			
+            	 </div>
+            	 <div class="content">
+            	 	<span class="recipe-title"><%= recipe.label %></span>
+            	 	<h6><strong>Ingredients: </strong></h6>
+            	 	<div class='ingredients'>
+	            	 	<ul>
+	        	 		<% for(i = 0; i < recipe.recipe.ingredientLines.length; i++ ) {%>
+	            	 		<li> <%= recipe.recipe.ingredientLines[i] %> </li>
+	            	 		<% } %>
+	            	 		<!-- <li>Calories: <script> document.write(calPerServ) </script></li> -->
+	            	 		<li>Calories: <%= recipe.recipe.calPerServ %></li>
+	            	 		<li>Servings: <%= recipe.recipe.yield %> </li>
+	            	 	</ul>
+	            	 </div>
+
+                   <form id='sub' method="POST" action="/profile">
+                     <input class='center' hidden type="text" name="label" value="<%= recipe.recipe.label %>">
+                     <input class='center' hidden type="text" name="ingredients" value="<%= recipe.recipe.ingredientLines %>">
+                     <input class='center' hidden type="text" name="url" value="<%= recipe.recipe.url %>">
+                     <input class='center' hidden type="text" name="uri" value="<%= recipe.recipe.uri %>">
+                     <input class='center' hidden type="text" name="image" value="<%= recipe.recipe.image %>">
+
+                     <% let encoded = encodeURIComponent( recipe.recipe.uri ); %>
+
+					 <form action="/recipe/show" method="GET">
+						<input type="text" hidden value="<%= encoded %>" name="foodEncoded">
+						<input type="text" hidden value="<%= encoded %>" name="foodEncoded">
+						<a class='left' href="/recipe/home/<%= encoded %>">View Details</a>
+						</form>
+						<a class='right' href="<%= recipe.recipe.url %>">Instruction</a>
+                     <%if (user) { %>
+						<form action="/profile/add" method="post">
+							<input type="hidden" name="id" value="<%= encoded %> ">
+							<button class='col s12 m12 l12' type="submit">save &hearts;s</button>
+							<button class='col s12 m12 l12' type="submit">Delete</button>
+						</form>
+                     <% } %>
+                      <% if (!user) { %>
+                        <a href='/auth/login' class='col s12 m12 l12'>Log In to Add&hearts;s</a>
+                      <% } %>
+                     <br>
+                   </form>
+
+                </div>
+              </div>
+		</div>
+		<% }); %>
+	</div>
+</div>
+
+<div class="scroller-status">
+  <div class="infinite-scroll-request loader-ellipse">
+    ...
+  </div>
+  <p class="infinite-scroll-last">End of content</p>
+  <p class="infinite-scroll-error">No more pages</p>
+</div>
+
+<!-- pagination has path -->
+<p class="p">
+  <a class="pagnext" href="page2.html">Next page</a>
+</p>

@@ -1,0 +1,73 @@
+<h1>This is my Recipes Home.ejs</h1>
+<!-- 
+<!<%= //message %>
+
+<%  // recipes.forEach(p => {   %> -->
+
+    <!-- <form action="/recipe/new" method="POST">
+        <input type="hidden" value="<%= //recipe.name %>" name="name">
+        <button type="submit"><%=  //recipe.name  %></button>
+    </form> -->
+<%    // })  //  %> -->
+
+<script>
+    let calories = Math.floor(recipe[0].calories);
+    let servings = Math.floor(recipe[0].yield);
+    let calPerServ = Math.floor(calories/servings); 
+  </script>
+  
+  <div class='row'>
+  <div class='col s12 m12 l12'>
+  <h4 class='center'><%= recipe[0].label %></h4>
+  <div class='col s12 m3 l3 center'>
+    <img class='responsive-img activator' src='<%= recipe[0].image %>' alt='<%= recipe[0].label %>'>
+    <br>
+    <a href='<%= recipe[0].url %>'>Instruction</a>
+  </div>
+  <div class='col s12 m3 l3'>
+    <h5>Ingredients: </h5>
+    <div class='ingredients detail'>
+      <ul class='browser-default'>
+        <% for(i = 0; i < recipe[0].ingredientLines.length; i++ ) {%>
+          <li> <%= recipe[0].ingredientLines[i] %> </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  
+  <div class='col s12 m3 l3'>
+    <h5>Additional Info:</h5>
+    <div class='ingredients detail'>
+      <ul>
+        <li><span class='label'>Calories Per Serving:</span> <script> document.write(calPerServ) </script></li>
+        <li><span class='label'>Servings:</span> <%= recipe[0].yield %> </li>
+        <h5  class='health'> Health Labels: </h5>
+        <% for(i = 0; i < recipe[0].healthLabels.length; i++ ) {%>
+          <li><%= recipe[0].healthLabels[i] %></li>
+        <% } %>
+        <h5 class='caution'> Cautions: </h5>
+        <% for(i = 0; i < recipe[0].cautions.length; i++ ) {%>
+          <li> <%= recipe[0].cautions[i] %> </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  
+  <div class='col s12 m3 l3'>
+    <h5>Nutrients:</h5>
+    <div class='ingredients detail'>
+      <ul>
+        <% let nutrients = recipe[0].totalNutrients; %>
+        <% let totalDaily = recipe[0].totalDaily; %>
+        <% for (let item in nutrients) { %>
+          <li> <span class='label'><%= nutrients[item].label %>:</span> <%= Math.floor(nutrients[item].quantity) %> <%= nutrients[item].unit %>   </li>
+        <% } %>
+      </ul>
+      <h5  class='health'> Total Daily: </h5>
+      <ul>
+        <% for (let item in totalDaily) { %>
+          <li> <span class='label'><%= totalDaily[item].label %>:</span> <%= Math.floor(totalDaily[item].quantity) %><%= totalDaily[item].unit %>   </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
